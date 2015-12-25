@@ -4,6 +4,7 @@ require 'spec_helper'
 describe Getvideo::Iqiyi do
   let(:iqiyi){ Getvideo::Iqiyi.new("http://www.iqiyi.com/weidianying/20120925/f15221a897037d07.html")}
   let(:iqiyi2){ Getvideo::Iqiyi.new "http://www.iqiyi.com/v_19rrh4jv9s.html" }
+  let(:iqiyi3){ GetVideo::Iqiyi.new "http://www.iqiyi.com/v_19rro02q0w.html#vfrm=3-2-bee-1" }
 
   let(:iqiyi_swf){ Getvideo::Iqiyi.new("http://player.video.qiyi.com/38c130b7b4124b1e902161e8e377324b/0/649/weidianying/20120925/f15221a897037d07.swf-pid=47084-ptype=2-albumId=233012-tvId=280286")}
 

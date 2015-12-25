@@ -17,4 +17,5 @@ test/version_tmp
 tmp
 *.swp
 *.swo
+*.un~
 .DS_Store
