@@ -15,6 +15,7 @@ require "getvideo/sohu"
 require "getvideo/iqiyi"
 require "getvideo/youtube"
 require 'getvideo/sina'
+require 'getvideo/qq'
 
 module Getvideo
   def self.parse(url)
@@ -34,6 +35,8 @@ module Getvideo
       Youtube.new(url)
     elsif url =~ /(iask|sina)/
       Sina.new(url)
+    elsif url =~ /v\.qq\.com/
+      QQ.new url
     else
       return false
     end
