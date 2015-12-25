@@ -7,7 +7,23 @@ end
 
 module Getvideo
   class Video
+
+    @@user_agents = {
+      iphone: "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1",
+      desktop: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9"
+    }
+
     attr_reader :url
+
+    def self.get(url,options = {})
+      faraday = Faraday.new(url)
+      if options[:iphone]
+        faraday.headers['User-Agent'] = @@user_agents[:iphone]
+      else
+        faraday.headers['User-Agent'] = @@user_agents[:desktop]
+      end
+      faraday.get
+    end
 
     def initialize(url)
       @url = url

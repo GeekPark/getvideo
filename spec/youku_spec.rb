@@ -42,6 +42,9 @@ describe Getvideo::Youku do
   end
 
   describe "#m3u8" do
-    it{ youku.m3u8.should == "http://v.youku.com/player/getM3U8/vid/111579583/type/flv/ts/v.m3u8"  }
+    # http://pl.youku.com/playlist/m3u8?vid=352444802&type=mp4&ts=1451051209&keyframe=0&ep=cCaRG0mIV8wA7CHfgT8bMS60dyNaXP0P9BuBhdpiAtQmSum7&sid=245105120920912f2f3de&token=2214&ctype=12&ev=1&oip=827005847
+    it{
+      youku.m3u8.should == "http://v.youku.com/player/getM3U8/vid/111579583/type/flv/ts/v.m3u8"
+    }
   end
 end
