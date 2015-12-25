@@ -16,6 +16,8 @@ alert = function(m) {
 navigator = {
   userAgent: ''
 }
+
+http = require("http")
 // end
 
 // copy from http://static.youku.com/h5/player/embed/unifull/unifull_.js
@@ -477,6 +479,7 @@ navigator = {
         }
         return null == this._callback ? "m3u8" == this._type ? YKP.GetM3U8OK(this._v, {}) : YKP.GetMP4OK(this._v, {}) : this._callback(this._v, {}), !0
     }, BuildVideoInfo.init = function(a) {
+        console.log("BuildVideoInfo.init",a)
         this._v = a;
         var b = a.data, c = b.stream;
         if (!b.security.encrypt_string ||!b.security.ip)
@@ -485,7 +488,8 @@ navigator = {
             return void YKP.showError(null, "该视频暂不能播放");
         var d = [19, 1, 4, 7, 30, 14, 28, 8, 24, 17, 6, 35, 34, 16, 9, 10, 13, 22, 32, 29, 31, 21, 18, 3, 2, 23, 25, 27, 11, 20, 5, 15, 12, 0, 33, 26], e = rc4(translate(YK.mk.a3 + "o0b" + YKP.userCache.a1, d).toString(), decode64(b.security.encrypt_string)), f = e.split("_");
         if (f.length < 2)
-            return YKP.sendErrorReport(2004), void YKP.showError(null, "数据解析错误");
+          return YKP.sendErrorReport(2004), void YKP.showError(null, "数据解析错误");
+        console.log('e',e);
         if (YKP.userCache.sid = e.split("_")[0], YKP.userCache.token = e.split("_")[1], null != b.error) {
             if ( - 202 == b.error.code||-203 == b.error.code)
                 YKP.sendErrorReport(4e3);
@@ -4540,12 +4544,36 @@ navigator = {
 
 
     // aotianlong: try to get m3u8 url
-    YK.v = {}
-    YK.v.data = {}
-    YK.v.data.security = {}
-    YK.mk = {}
-    YK.mk.a3 = 'x';
-    console.log(YK.m3u8src_v2('a','b'))
+    new YoukuPlayerSelect({
+      canWidth: 0,
+      client_id: "youkumobileplaypage",
+      events: {},
+      expand: 0,
+      adconfig: {},
+      id: "youku-player",
+      paid: "1",
+      playlistconfig: {},
+      prefer: "h5",
+      vid: "352444802",
+      vvlogconfig: {rurl: ''},
+      wintype: 'interior',
+      target: 'xxx'
+    })
+    url = require("url");
+    o_url = url.parse("http://play.youku.com/play/get.json?vid=352444802&ct=12&callback=BuildVideoInfo.response")
+    o_url.headers = {Referer: 'http://www.youku.com/'}
+    http.get(o_url,function(response){
+      html = "";
+      response.on("data",function(data){
+        html += data;
+      });
+      response.on('end',function(){
+        //json = JSON.parse(html)
+        //BuildVideoInfo.response(json)
+        eval(html);
+        console.log(YK.m3u8src_v2('352444802','mp4'))
+      })
+    });
     // end
 
 
