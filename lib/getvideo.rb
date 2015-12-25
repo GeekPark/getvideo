@@ -18,6 +18,11 @@ require 'getvideo/sina'
 require 'getvideo/qq'
 
 module Getvideo
+
+  def self.root
+    Pathname.new File.join(File.dirname(__FILE__),"..")
+  end
+
   def self.parse(url)
     if url =~ /youku/
       Youku.new(url)
