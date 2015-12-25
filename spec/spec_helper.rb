@@ -17,6 +17,8 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+Bundler.require :test
+
 require "getvideo"
 
 RSpec.configure do |config|

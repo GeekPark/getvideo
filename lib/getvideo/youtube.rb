@@ -20,7 +20,8 @@ module Getvideo
     end
 
     def cover
-      CGI::unescape(response.scan(/thumbnail_url=([^&]+)/)[0][0]).gsub("default.jpg","")+"0.jpg"
+      # CGI::unescape(response.scan(/thumbnail_url=([^&]+)/)[0][0]).gsub("default.jpg","")+"0.jpg"
+      "https://i.ytimg.com/vi/#{id}/mqdefault.jpg"
     end
 
     def flash
