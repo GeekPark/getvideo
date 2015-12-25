@@ -33,7 +33,7 @@ module Getvideo
     end
 
     def m3u8
-      cmd = "node #{Getvideo.root.join("js","youku_get_m3u8.js")} #{videoid}"
+      cmd = "node #{Getvideo.root.join("js","youku_get_m3u8.js")} #{id}"
       `#{cmd}`.strip
     end
 
