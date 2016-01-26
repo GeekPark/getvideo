@@ -28,13 +28,17 @@ module Getvideo
     def media
       begin
         response['root'] || {}
-      rescue Exception =>e 
+      rescue Exception =>e
         {}
       end
     end
 
     def flash
       "http://imgcache.qq.com/tencentvideo_v1/player/TencentPlayer.swf?vid=#{id}"
+    end
+
+    def iframe
+      "http://v.qq.com/iframe/player.html?vid=#{id}&tiny=0&auto=0"
     end
 
     def cover
@@ -48,7 +52,7 @@ module Getvideo
     def play_media
       begin
         media['vd']['vi']['urlbk']['ui'][0]['url']
-      rescue Exception =>e 
+      rescue Exception =>e
       end
     end
 
