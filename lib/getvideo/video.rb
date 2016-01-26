@@ -45,6 +45,7 @@ module Getvideo
     def flash; end
     def m3u8; end
     def media; end
+    def iframe; end
 
     def play_media
       media["mp4"][0] if media["mp4"]
@@ -57,7 +58,9 @@ module Getvideo
         title: title,
         m3u8: m3u8,
         flash: flash,
-        media: play_media}.to_json
+        media: play_media,
+        iframe: iframe
+      }.to_json
     end
 
     class << self

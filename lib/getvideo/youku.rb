@@ -32,6 +32,10 @@ module Getvideo
       "http://player.youku.com/player.php/sid/#{id}/v.swf"
     end
 
+    def iframe
+      "http://player.youku.com/embed/#{id}"
+    end
+
     def m3u8
       cmd = "node #{Getvideo.root.join("js","youku_get_m3u8.js")} #{id}"
       `#{cmd}`.strip
@@ -40,7 +44,8 @@ module Getvideo
     def media(type = nil)
       {
         'mp4' => [m3u8],
-        'flash' => [flash]
+        'flash' => [flash],
+        'iframe' => [iframe],
       }
     end
 
@@ -50,7 +55,7 @@ module Getvideo
       @info ||= begin
         url = "http://play.youku.com/play/get.json?vid=" + id + "&ct=12"
         result = Faraday.get url,{},referer: 'http://www.youku.com'
-        hash = JSON.parse(result.body) 
+        hash = JSON.parse(result.body)
       end
     end
   end
