@@ -16,7 +16,7 @@ module Getvideo
     def id
       vid = Rack::Utils.parse_query(URI(url).query)['vid']
       unless vid
-        vid = cover.split("/").last.split("_").first
+        vid = cover.split("/")[-2].split("_").first
       end
       vid
     end
