@@ -16,7 +16,8 @@ module Getvideo
     def id
       vid = Rack::Utils.parse_query(URI(url).query)['vid']
       unless vid
-        vid = cover.split("/")[-2].split("_").first
+        # vid = cover.split("/")[-2].split("_").first
+        vid = Faraday.get(url).body.match(/vid":"(\w+)"\,/)[1]
       end
       vid
     end
